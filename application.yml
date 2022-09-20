@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/search_engine
+    username: root
+    password: RkGFKx5r4K
+spring.jpa.hibernate.ddl-auto: none
+spring.jpa.properties.hibernate:
+  jdbc.batch_size: 40
+  order_inserts: true
+sites:
+  -
+    url: http://www.playback.ru
+    name: Интернет-магазин Playback
+#  -
+#    url: https://www.svetlovka.ru
+#    name: Библиотека им. М. А. Светлова
+#  -
+#    url: https://nikoartgallery.com
+#    name: Галерея Никогосяна
+limit: 20
+user-agent: BestSearchBot
+webInterface: /admin
