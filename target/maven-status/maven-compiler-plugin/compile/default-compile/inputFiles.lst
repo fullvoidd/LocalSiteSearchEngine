@@ -1,35 +1,35 @@
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\config\ApplicationProperties.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\dto\SearchServiceData.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\systems\lemmatize\Lemmatizer.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\model\Field.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\controllers\DefaultController.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\dto\DataForResultMapCalculation.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\dto\DataForSearchSystem.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\repositories\FieldRepository.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\dto\SearchResult.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\model\Index.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\systems\indexing\IndexingSystem.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\controllers\IndexingController.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\services\IndexingService.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\dto\DataForSnippetCalculation.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\model\SiteIndexingStatus.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\repositories\IndexRepository.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\services\SearchService.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\systems\search\SearchSystem.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\systems\search\FindOnOneSite.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\dto\DataForPrimaryParsing.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\systems\search\ResultMapCalculation.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\services\ErrorResultResponse.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\dto\DataForSecondaryParsing.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\model\Lemma.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\dto\DataForIndexingOnePage.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\systems\search\SnippetCalculation.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\systems\indexing\LemmaAndIndexPersisting.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\systems\indexing\LinkParser.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\model\Page.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\model\Site.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\repositories\PageRepository.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\StartSite.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\repositories\LemmaRepository.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\repositories\SiteRepository.java
-C:\Users\eldo1\444\java_basics\SearchEngine\search_engine\src\main\java\main\services\StatisticsService.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\dto\SearchServiceData.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\dto\DataForPrimaryParsing.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\dto\DataForIndexingOnePage.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\systems\search\SearchSystem.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\model\SiteIndexingStatus.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\dto\SearchResult.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\model\Page.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\controllers\IndexingController.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\repositories\IndexRepository.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\repositories\PageRepository.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\dto\DataForResultMapCalculation.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\model\Lemma.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\services\StatisticsService.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\systems\search\FindOnOneSite.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\config\ApplicationProperties.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\systems\search\SnippetCalculation.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\dto\DataForSnippetCalculation.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\model\Field.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\model\Index.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\systems\search\ResultMapCalculation.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\systems\indexing\LinkParser.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\systems\indexing\LemmaAndIndexPersisting.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\repositories\SiteRepository.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\systems\indexing\IndexingSystem.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\services\IndexingService.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\dto\DataForSecondaryParsing.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\repositories\FieldRepository.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\services\SearchService.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\dto\ErrorResultResponse.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\model\Site.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\dto\DataForSearchSystem.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\systems\lemmatize\Lemmatizer.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\repositories\LemmaRepository.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\controllers\DefaultController.java
+C:\Users\eldo1\OneDrive\Рабочий стол\github\SearchEngine\src\main\java\main\StartSite.java

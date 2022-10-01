@@ -12,7 +12,6 @@ main\dto\DataForResultMapCalculation.class
 main\dto\SearchServiceData.class
 main\services\SearchService.class
 main\dto\DataForSearchSystem.class
-main\services\ErrorResultResponse.class
 main\systems\indexing\IndexingSystem.class
 main\systems\search\SnippetCalculation.class
 main\systems\search\SearchSystem.class
