@@ -33,11 +33,18 @@ public class Lemmatizer {
                 .trim()
                 .split("\\s+");
         for(String word : wordList) {
-            if (word.isBlank()) continue;
-            if (hasParticles(luceneMorph, word)) continue;
+            if (word.isBlank()) {
+                continue;
+            }
+
+            if (hasParticles(luceneMorph, word)) {
+                continue;
+            }
 
             List<String> wordBF = luceneMorph.getNormalForms(word).stream().toList();
-            if (wordBF.isEmpty()) continue;
+            if (wordBF.isEmpty()) {
+                continue;
+            }
 
             wordBF.forEach(normalWord -> {
                 if (wordBaseFormsMap.containsKey(normalWord)) {
@@ -83,12 +90,16 @@ public class Lemmatizer {
         while (matcher.find()) {
             String word = text.substring(matcher.start(), matcher.end());
             String expression = word.toLowerCase();
-            if (expression.isEmpty()) continue;
+            if (expression.isEmpty()) {
+                continue;
+            }
             List<String> wordInfo = luceneMorph.getMorphInfo(expression);
             for (String info : wordInfo) {
                 String specialSymbol = info.substring(info.indexOf("|") + 1, info.indexOf("|") + 2);
                 if (specialSymbol.equals("o") || specialSymbol.equals("n") ||
-                        specialSymbol.equals("l") || specialSymbol.equals("p")) continue;
+                        specialSymbol.equals("l") || specialSymbol.equals("p")) {
+                    continue;
+                }
                 List<String> wordBF = luceneMorph.getNormalForms(expression).stream().toList();
                 resultSet.add(addWordList(wordBF, info, word));
             }
@@ -108,7 +119,9 @@ public class Lemmatizer {
         List<String> list = new ArrayList<>();
         wordBF.forEach(form -> {
             if (info.contains(form) && !list.contains(form)) {
-                if (!word.equals(form)) list.add(word);
+                if (!word.equals(form)) {
+                    list.add(word);
+                }
                 list.add(form);
             }
         });

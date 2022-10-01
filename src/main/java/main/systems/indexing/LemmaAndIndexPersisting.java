@@ -39,7 +39,6 @@ public class LemmaAndIndexPersisting implements Runnable{
 
         synchronized (LemmaAndIndexPersisting.class) {
             HashMap<String, Lemma> resultLemmaMap = indexingService.getLemmaMapBySiteId(page.getSite().getId());
-
             for (String lemmaStr : lemmaMapWithRank.keySet()) {
                 if (!resultLemmaMap.containsKey(lemmaStr)) {
                     lemmaMapForSave.putAll(lemmaMapWithRank.get(lemmaStr));

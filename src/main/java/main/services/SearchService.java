@@ -43,7 +43,9 @@ public class SearchService {
     private JSONArray getData() {
         JSONArray data = new JSONArray();
 
-        if (searchResultMap.isEmpty()) return data;
+        if (searchResultMap.isEmpty()) {
+            return data;
+        }
         List<Map.Entry<SearchResult, Float>> toSort = new ArrayList<>(searchResultMap.entrySet());
         toSort.sort(Map.Entry.<SearchResult, Float>comparingByValue().reversed());
         for (int i = offset; count < limit; i++) {
@@ -52,7 +54,9 @@ public class SearchService {
             SearchResult result = entry.getKey();
             String urlForSearch = siteRepository.findById(result.getSiteId()).get().getUrl();
             siteList.forEach(site -> {
-                if (!urlForSearch.equals(site.getUrl())) return;
+                if (!urlForSearch.equals(site.getUrl())) {
+                    return;
+                }
                 JSONObject content = new JSONObject();
                 content.put("site", urlForSearch);
                 content.put("siteName", site.getName());

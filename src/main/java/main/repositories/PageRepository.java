@@ -15,7 +15,4 @@ public interface PageRepository extends JpaRepository<Page, Integer> {
     long getCountOfCertainSite(@Param("site_id") long siteId);
 
     Page getPageByPathAndSiteId(String path, int siteId);
-
-    @Query("SELECT lp FROM Page lp WHERE lp.id in ?1")
-    List<Page> getPageListByIds(List<Integer> ids);
 }

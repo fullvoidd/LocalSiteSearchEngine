@@ -27,7 +27,7 @@ public class IndexingService {
     private final IndexRepository indexRepository;
 
     public void saveSite(Site site) {
-        siteRepository.save(site);
+        siteRepository.saveAndFlush(site);
     }
 
     public void saveAllLemmas(Set<Lemma> lemmaSet) {
@@ -38,15 +38,8 @@ public class IndexingService {
         indexRepository.saveAllAndFlush(indexSet);
     }
 
-    public void deletePageWhenReindexing(Page page) {
-        List<Integer> lemmaIds = indexRepository.getLemmaIdsListByPageId(page.getId());
-        lemmaRepository.decreaseLemmaByIds(lemmaIds);
-        indexRepository.deleteIndexesByPageId(page.getId());
-        pageRepository.delete(page);
-    }
-
     public void savePage(Page page) {
-        pageRepository.save(page);
+        pageRepository.saveAndFlush(page);
     }
 
     public List<Field> getFieldList() {
@@ -86,7 +79,6 @@ public class IndexingService {
         return mapForResponse;
     }
 
-
     /**
      * The method gets as parameters a {@code List} of {@link Lemma} and response {@code HashMap}
      * with {@link Lemma} as key and {@code List}<{@link Index}> as value.
@@ -103,11 +95,20 @@ public class IndexingService {
         lemmaList.forEach(lemma -> {
             List<Index> indexListOfSpecificLemma = new ArrayList<>();
             indexList.forEach(index -> {
-                if (index.getLemma().getId() == lemma.getId()) indexListOfSpecificLemma.add(index);
+                if (index.getLemma().getId() == lemma.getId()) {
+                    indexListOfSpecificLemma.add(index);
+                }
             });
             resultMap.put(lemma, indexListOfSpecificLemma);
         });
 
         return resultMap;
+    }
+
+    public void deletePageWhenReindexing(Page page) {
+        List<Integer> lemmaIds = indexRepository.getLemmaIdsListByPageId(page.getId());
+        lemmaRepository.decreaseLemmaByIds(lemmaIds);
+        indexRepository.deleteIndexesByPageId(page.getId());
+        pageRepository.delete(page);
     }
 }

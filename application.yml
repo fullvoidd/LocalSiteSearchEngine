@@ -11,12 +11,12 @@ sites:
   -
     url: http://www.playback.ru
     name: Интернет-магазин Playback
-#  -
-#    url: https://www.svetlovka.ru
-#    name: Библиотека им. М. А. Светлова
-#  -
-#    url: https://nikoartgallery.com
-#    name: Галерея Никогосяна
+  -
+    url: https://www.svetlovka.ru
+    name: Библиотека им. М. А. Светлова
+  -
+    url: https://nikoartgallery.com
+    name: Галерея Никогосяна
 limit: 20
 user-agent: BestSearchBot
 webInterface: /admin

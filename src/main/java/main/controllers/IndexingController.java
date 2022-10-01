@@ -3,7 +3,7 @@ package main.controllers;
 import main.config.ApplicationProperties;
 import main.dto.DataForIndexingOnePage;
 import main.dto.DataForPrimaryParsing;
-import main.services.ErrorResultResponse;
+import main.dto.ErrorResultResponse;
 import main.dto.SearchServiceData;
 import main.systems.indexing.LinkParser;
 import main.dto.SearchResult;
@@ -21,10 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -61,8 +58,9 @@ public class IndexingController {
     @GetMapping("/startIndexing")
     public ResponseEntity<JSONObject> startIndexing() {
         JSONObject result = new JSONObject();
-        if (isIndexing.get())
+        if (isIndexing.get()) {
             return ResponseEntity.ok().body(ErrorResultResponse.getResult("Индексация уже запущена"));
+        }
         try {
             isIndexing.set(true);
             pool = new ForkJoinPool();
@@ -71,11 +69,10 @@ public class IndexingController {
                     siteRepository, lemmaRepository, pageRepository, fieldRepository, indexRepository);
             List<ApplicationProperties.CfgSite> cfgSiteList = applicationProperties.getSites();
             for (ApplicationProperties.CfgSite cfgSite : cfgSiteList) {
-                int number = cfgSiteList.indexOf(cfgSite);
                 Site site = new Site(SiteIndexingStatus.INDEXING, new Date(), null,
                         cfgSite.getUrl(), cfgSite.getName());
                 LinkParser linkParser = new LinkParser(new DataForPrimaryParsing(
-                        site, isIndexing, indexingService, number, new Lemmatizer()));
+                        site, isIndexing, indexingService, cfgSiteList.indexOf(cfgSite), new Lemmatizer()));
                 Thread thread = new Thread(() -> pool.invoke(linkParser));
                 thread.setName(site.getUrl());
                 thread.start();
@@ -123,15 +120,18 @@ public class IndexingController {
         threadOfEachSiteList.forEach(thread -> {
             Site site = new Site();
             for (Site siteForFind : siteList) if (siteForFind.getUrl().equals(thread.getName())) site = siteForFind;
-            if (!thread.getState().equals(Thread.State.TERMINATED) || site.getLastError() != null) return;
+            if (!thread.getState().equals(Thread.State.TERMINATED) || site.getLastError() != null) {
+                return;
+            }
             if (site.getStatus() != SiteIndexingStatus.INDEXED) {
                 site.setStatusTime(new Date());
                 site.setStatus(SiteIndexingStatus.INDEXED);
                 siteRepository.save(site);
             }
         });
-        if (siteList.stream().allMatch(s -> s.getStatus().equals(SiteIndexingStatus.INDEXED)) && isIndexing.get())
+        if (siteList.stream().allMatch(s -> s.getStatus().equals(SiteIndexingStatus.INDEXED)) && isIndexing.get()) {
             isIndexing.set(false);
+        }
         try {
             StatisticsService statisticsService =
                     new StatisticsService(siteRepository, lemmaRepository, pageRepository);
@@ -150,13 +150,17 @@ public class IndexingController {
         JSONObject result = new JSONObject();
         try {
             for (ApplicationProperties.CfgSite site : applicationProperties.getSites()) {
-                if (!url.contains(site.getUrl())) continue;
+                if (!url.contains(site.getUrl())) {
+                    continue;
+                }
                 IndexingService indexingService = new IndexingService(siteRepository, lemmaRepository,
                         pageRepository, fieldRepository, indexRepository);
                 DataForIndexingOnePage data =
                         new DataForIndexingOnePage(url, indexingService, new Lemmatizer(), true);
                 LinkParser indexOnePage = new LinkParser(data);
-                if (pool == null || pool.isTerminated()) pool = new ForkJoinPool();
+                if (pool == null || pool.isTerminated()) {
+                    pool = new ForkJoinPool();
+                }
                 new Thread(() -> pool.invoke(indexOnePage)).start();
                 result.put("result", true);
                 return new ResponseEntity<>(result, HttpStatus.OK);
@@ -174,15 +178,16 @@ public class IndexingController {
                                              @RequestParam(required = false) String site,
                                              @RequestParam(defaultValue = "0") int offset,
                                              @RequestParam(defaultValue = "20") int limit) {
-        if (isIndexing.get()) return ResponseEntity.ok().body(
-                ErrorResultResponse.getResult("Приостановите индексацию или дождитесь её завершения"));
-        if (query.isEmpty())
+        if (isIndexing.get()) {
+            return ResponseEntity.ok().body(
+                    ErrorResultResponse.getResult("Приостановите индексацию или дождитесь её завершения"));
+        }
+        if (query.isEmpty()) {
             return ResponseEntity.ok().body(ErrorResultResponse.getResult("Задан пустой поисковый запрос"));
+        }
         try {
             limit = applicationProperties.getLimit();
-            boolean isEqualLastSite;
-            if (site == null) isEqualLastSite = lastSite == null;
-            else isEqualLastSite = site.equals(lastSite);
+            boolean isEqualLastSite = Objects.equals(site, lastSite);
             if (!query.equals(lastQuery) || !isEqualLastSite) {
                 SearchSystem searchSystem = new SearchSystem();
                 searchResult = searchSystem.find(query, new IndexingService(

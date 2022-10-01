@@ -45,7 +45,9 @@ public class FindOnOneSite implements Runnable{
     public void run() {
         try {
             List<Lemma> lemmaList = getSortedLemmaList(userRequest, indexingService);
-            if (lemmaList == null) return;
+            if (lemmaList == null) {
+                return;
+            }
             this.lemmaList = lemmaList;
             pageMapForSearch = getPageMapForSearch(indexingService);
             for (Page page : pageMapForSearch.keySet()) {
@@ -71,9 +73,13 @@ public class FindOnOneSite implements Runnable{
         List<Lemma> lemmaList = new ArrayList<>();
         for (String lemma : userLemmaMap.keySet()) {
             Lemma nextLemma = indexingService.getLemmaByNameAndSiteId(lemma, siteId);
-            if (nextLemma != null) lemmaList.add(nextLemma);
+            if (nextLemma != null) {
+                lemmaList.add(nextLemma);
+            }
         }
-        if (userLemmaMap.size() != lemmaList.size()) return null;
+        if (userLemmaMap.size() != lemmaList.size()) {
+            return null;
+        }
         lemmaList.sort(Comparator.comparing(Lemma::getFrequency));
 
         return lemmaList;
@@ -91,7 +97,9 @@ public class FindOnOneSite implements Runnable{
         HashMap<Lemma, List<Index>> lemmaAndIndexMap = indexingService.getLemmaAndIndexMap(lemmaList);
         for (Lemma lemma : lemmaAndIndexMap.keySet()) {
             List<Index> indexList = lemmaAndIndexMap.get(lemma);
-            if (!((double) (indexList.size() / pagesCount) < 0.4)) continue;
+            if (!((double) (indexList.size() / pagesCount) < 0.4)) {
+                continue;
+            }
             if (pageMapForSearch.isEmpty()) {
                 indexList.forEach(index -> {
                     float[] rank = new float[1];
@@ -120,7 +128,9 @@ public class FindOnOneSite implements Runnable{
         HashMap<Page, float[]> copyPageMapForSearch = new HashMap<>();
         for (Index index : indexList) {
             for (Page page : pageMapForSearch.keySet()) {
-                if (page.getId() != index.getPage().getId()) continue;
+                if (page.getId() != index.getPage().getId()) {
+                    continue;
+                }
                 int length = pageMapForSearch.get(page).length;
                 copyPageMapForSearch.put(page, rankMassiveCalculation(index, page, length));
                 break;
@@ -169,8 +179,12 @@ public class FindOnOneSite implements Runnable{
         for (Page page : pageMapForSearch.keySet()) {
             float[] rankMassive = new float[pageMapForSearch.get(page).length + 1];
             for (int i = 0; i < rankMassive.length; i++) {
-                if (i != rankMassive.length - 1) rankMassive[i] = pageMapForSearch.get(page)[i];
-                else rankMassive[i] = rankMassive[i - 1] / maxRank;
+                if (i != rankMassive.length - 1) {
+                    rankMassive[i] = pageMapForSearch.get(page)[i];
+                }
+                else {
+                    rankMassive[i] = rankMassive[i - 1] / maxRank;
+                }
             }
             pageMapForSearch.put(page, rankMassive);
         }
@@ -179,17 +193,16 @@ public class FindOnOneSite implements Runnable{
     /**
      * This method finds max rank in main {@code Map} for search.
      *
-     * @return max rank
      */
-    private float findMaxRank() {
+    private void findMaxRank() {
         for (Page page : pageMapForSearch.keySet()) {
             for (int i = 0; i < pageMapForSearch.get(page).length; i++) {
-                if (pageMapForSearch.get(page)[i] < maxRank) continue;
+                if (pageMapForSearch.get(page)[i] < maxRank) {
+                    continue;
+                }
                 maxRank = pageMapForSearch.get(page)[i];
                 data.setMaxRank(maxRank);
             }
         }
-        return maxRank;
     }
-
 }

@@ -130,7 +130,9 @@ public class LinkParser extends RecursiveTask<List<String>> {
             return null;
         }
 
-        if (Thread.interrupted() || !isIndexing.get()) return null;
+        if (Thread.interrupted() || !isIndexing.get()) {
+            return null;
+        }
 
         List<String> list = new ArrayList<>();
         List<LinkParser> tasks = new ArrayList<>();
@@ -163,7 +165,9 @@ public class LinkParser extends RecursiveTask<List<String>> {
                     .userAgent("Mozilla/5.0 (Windows; U; WindowsNT " +
                             "5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
                     .referrer("http://www.google.com");
-            if (!url.equals(mySite)) connection.ignoreHttpErrors(true);
+            if (!url.equals(mySite)) {
+                connection.ignoreHttpErrors(true);
+            }
             Connection.Response response = connection.execute();
             if (Integer.toString(response.statusCode()).startsWith("2")) {
                 doc = response.parse();
@@ -190,11 +194,18 @@ public class LinkParser extends RecursiveTask<List<String>> {
      * @return boolean flag, that tells is the format correct
      */
     private boolean isConnect(String thisUrl) {
-        if (!thisUrl.contains(mySite)) return false;
-        if (thisUrl.contains("#")) return false;
+        if (!thisUrl.contains(mySite)) {
+            return false;
+        }
+
+        if (thisUrl.contains("#")) {
+            return false;
+        }
+
         if ((thisUrl.endsWith(".html")) || (!thisUrl.substring(thisUrl.lastIndexOf("/")).contains("."))) {
             return indexOnePage || uniqueUrls.add(thisUrl);
         }
+
         return false;
     }
 
@@ -210,11 +221,18 @@ public class LinkParser extends RecursiveTask<List<String>> {
             return;
         }
         Page page = pagePersisting(thisUrl);
-        if (page == null) return;
+        if (page == null) {
+            return;
+        }
 
-        if (!page.getContent().equals("")) new IndexingSystem(page, indexingService, lemmatizer).run();
+        if (!page.getContent().equals("")) {
+            new IndexingSystem(page, indexingService, lemmatizer).run();
+        }
 
-        if (indexOnePage) return;
+        if (indexOnePage) {
+            return;
+        }
+
         if (!(Thread.interrupted() || page.getContent().equals(""))) {
             list.add(thisUrl);
             DataForSecondaryParsing data = new DataForSecondaryParsing(thisUrl, mySite, uniqueUrls,
@@ -233,9 +251,13 @@ public class LinkParser extends RecursiveTask<List<String>> {
      * @return {@link Page} object for further processing
      */
     private Page pagePersisting(String thisUrl) {
-        if (isIndexing != null && (Thread.interrupted() || !isIndexing.get())) return null;
+        if (isIndexing != null && (Thread.interrupted() || !isIndexing.get())) {
+            return null;
+        }
         String path = thisUrl.substring(mySite.length() - 1);
-        while (path.indexOf("/") != 0) path = path.substring(1);
+        while (path.indexOf("/") != 0) {
+            path = path.substring(1);
+        }
         int responseCode = 0;
         String content = "";
         try {
@@ -253,12 +275,13 @@ public class LinkParser extends RecursiveTask<List<String>> {
             System.out.println(thisUrl);
             e.printStackTrace();
         }
-        Page page = !content.equals("")
-                ? new Page(content, responseCode, path, site)
+        Page page = !content.equals("") ? new Page(content, responseCode, path, site)
                 : new Page("", responseCode, path, site);
         if (indexOnePage) {
             Page pageFromDB = indexingService.getPageByPathAndSiteId(path, site.getId());
-            if (pageFromDB != null) indexingService.deletePageWhenReindexing(pageFromDB);
+            if (pageFromDB != null) {
+                indexingService.deletePageWhenReindexing(pageFromDB);
+            }
         }
         indexingService.savePage(page);
         return page;
@@ -271,6 +294,8 @@ public class LinkParser extends RecursiveTask<List<String>> {
      */
     public void setIndexing(AtomicBoolean isIndexing) {
         this.isIndexing = isIndexing;
-        if (session.isOpen()) session.close();
+        if (session.isOpen()) {
+            session.close();
+        }
     }
 }

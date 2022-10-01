@@ -1,4 +1,4 @@
-package main.services;
+package main.dto;
 
 import org.json.simple.JSONObject;
 
@@ -6,7 +6,6 @@ import org.json.simple.JSONObject;
  * This class is used to generate API request result when an error occurs.
  */
 public class ErrorResultResponse {
-
 
     /**
      * Static method. It creates a <code>JSONObject</code> and fills it in.

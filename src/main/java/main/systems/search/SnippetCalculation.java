@@ -37,7 +37,9 @@ public class SnippetCalculation implements Runnable{
             matchList.add(mapForCheck.get(lem).stream().anyMatch(rawFragmentList::contains));
         }
 
-        if (matchList.stream().allMatch(t -> t)) snippetSet.add(fragment);
+        if (matchList.stream().allMatch(t -> t)) {
+            snippetSet.add(fragment);
+        }
     }
 
     /**
@@ -66,7 +68,9 @@ public class SnippetCalculation implements Runnable{
     private int calculateStartId(int newStart) {
         int fragmentStartId = newStart;
         while (true) {
-            if ((fragmentStartId - 1) < 0) break;
+            if ((fragmentStartId - 1) < 0) {
+                break;
+            }
             if (Character.toString(stringDoc.charAt(fragmentStartId - 1)).equals(">")) {
                 if (stringDoc.startsWith("</b>", fragmentStartId - 4) ||
                         stringDoc.startsWith("<b>", fragmentStartId - 3)) {
@@ -92,7 +96,9 @@ public class SnippetCalculation implements Runnable{
     private int calculateEndId(int newEnd) {
         int fragmentEndId = newEnd;
         while (true) {
-            if ((fragmentEndId + 1) > stringDoc.length()) break;
+            if ((fragmentEndId + 1) > stringDoc.length()) {
+                break;
+            }
             if (Character.toString(stringDoc.charAt(fragmentEndId)).equals("<")) {
                 if (stringDoc.startsWith("<b>", fragmentEndId) ||
                         stringDoc.startsWith("</b>", fragmentEndId)) {

@@ -45,7 +45,9 @@ public class ResultMapCalculation implements Runnable{
         StringBuilder relevance = new StringBuilder();
 
         snippet = getSnippet(page.getContent(), snippet);
-        if (snippet.isEmpty()) return;
+        if (snippet.isEmpty()) {
+            return;
+        }
 
         for (int i = 0; i < pageMapForSearch.get(page).length; i++) {
             relevance.append(pageMapForSearch.get(page)[i]).append(" ");
@@ -79,7 +81,9 @@ public class ResultMapCalculation implements Runnable{
             Matcher matcher = pattern.matcher(content);
             while (matcher.find()) {
                 String strForCheck = content.substring(matcher.start(), matcher.end());
-                if (!strForCheck.contains("title=\"")) continue;
+                if (!strForCheck.contains("title=\"")) {
+                    continue;
+                }
                 strForParsing = strForCheck;
                 isTitleInSpan = true;
                 break;
@@ -143,9 +147,13 @@ public class ResultMapCalculation implements Runnable{
         TreeMap<String, List<String>> mapForCheck = new TreeMap<>();
         for (List<String> list : lemmaListFromText) {
             for (Lemma lemma : lemmaListFromRequest) {
-                if (!list.contains(lemma.getLemma())) continue;
+                if (!list.contains(lemma.getLemma())) {
+                    continue;
+                }
                 for (String word : list) {
-                    if (!mapForCheck.containsKey(lemma.getLemma())) mapForCheck.put(lemma.getLemma(), list);
+                    if (!mapForCheck.containsKey(lemma.getLemma())) {
+                        mapForCheck.put(lemma.getLemma(), list);
+                    }
                     else if (!mapForCheck.get(lemma.getLemma()).contains(word)) {
                         List<String> l = mapForCheck.get(lemma.getLemma());
                         l.add(word);
@@ -173,7 +181,9 @@ public class ResultMapCalculation implements Runnable{
                 Matcher matcher = pattern.matcher(stringDoc);
                 DataForSnippetCalculation data =
                         new DataForSnippetCalculation(snippetSet, matcher, stringDoc, mapForCheck);
-                while (matcher.find()) new SnippetCalculation(data).run();
+                while (matcher.find()) {
+                    new SnippetCalculation(data).run();
+                }
             }
         }
         return snippetSet;
