@@ -94,5 +94,5 @@
 java -jar launcher/LocalSiteSearchEngine-1.0-SNAPSHOT.jar
 ```
   
-После запуска проекта достаточноввести http://localhost:8080/ в
+После запуска проекта достаточно ввести http://localhost:8080/ в
 адресной строке браузера и откроется интерактивное меню.
